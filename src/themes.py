@@ -1,0 +1,393 @@
+"""Design tokens and original CSS for the NK Obsidian theme collection."""
+
+SANS = '"Segoe UI Variable", "Segoe UI", "Microsoft YaHei", sans-serif'
+
+MONO = '"Cascadia Code", "JetBrains Mono", Consolas, "Microsoft YaHei", monospace'
+
+VERSION = '1.1.0'
+
+COLLECTION = [
+    dict(id='aurora', name='NK - Aurora Glass', title='极光玻璃', subtitle='流动极光 · 磨砂玻璃 · 悬浮面板', radius='18px', inner='12px', gap='12px', font=SANS, heading=SANS,
+         dark=['#111528','#1a2038','#222b46','#edf1ff','#a7b3d0','#697994','#9ae8d6','#b6a5ff','#34415c','#283953','#090e1d'],
+         light=['#f2f5fe','#e5eaf9','#ffffff','#27354f','#596a88','#7c89a5','#226e6a','#7152b7','#cdd7ee','#d6e8ed','#e0e8f8'],
+         motion='aurora-drift'),
+    dict(id='ocean', name='NK - Abyssal Bloom', title='深海浮光', subtitle='深海波纹 · 荧光水母', radius='22px', inner='14px', gap='12px', font=SANS, heading=SANS,
+         dark=['#1d303a','#263d46','#304b55','#e2f0f1','#a9c2c6','#879fa5','#a4d7d0','#b2c7e7','#476069','#35545d','#182a33'],
+         light=['#f5f9fa','#e9f1f2','#ffffff','#2d4650','#6c838b','#899da3','#356d75','#626f9c','#d6e2e5','#e3eff0','#e6eef1'],
+         motion='jellyfish-drift'),
+    dict(id='cyber', name='NK - Neon Circuit', title='霓虹回路', subtitle='终端网格 · 呼吸光轨', radius='5px', inner='3px', gap='8px', font=SANS, heading=MONO,
+         dark=['#141522','#1b1d2d','#222638','#edf1fc','#a7abc4','#777f9d','#75dce7','#f09bae','#373b56','#243d50','#0e101c'],
+         light=['#f0f3fa','#e0e6f2','#fbfdff','#27324e','#566481','#7e88a2','#14647e','#9c3c70','#c2cde0','#d6e5f0','#d9e0ef'],
+         motion='circuit-scan'),
+]
+
+COMMON = r'''
+/* NK collection · local fonts and CSS only · no network requests. */
+body {
+  --background-primary: var(--nk-bg);
+  --background-primary-alt: var(--nk-side);
+  --background-secondary: var(--nk-side);
+  --background-secondary-alt: var(--nk-deep);
+  --background-modifier-border: var(--nk-border);
+  --background-modifier-border-hover: var(--nk-muted);
+  --background-modifier-border-focus: var(--nk-accent);
+  --background-modifier-form-field: var(--nk-raised);
+  --background-modifier-form-field-hover: var(--nk-hover);
+  --background-modifier-hover: var(--nk-hover);
+  --background-modifier-active-hover: var(--nk-hover);
+  --background-modifier-success: color-mix(in srgb, var(--nk-accent) 20%, transparent);
+  --text-normal: var(--nk-text);
+  --text-muted: var(--nk-muted);
+  --text-faint: var(--nk-faint);
+  --text-accent: var(--nk-accent);
+  --text-accent-hover: var(--nk-secondary);
+  --text-on-accent: var(--nk-bg);
+  --text-selection: color-mix(in srgb, var(--nk-accent) 24%, transparent);
+  --interactive-normal: var(--nk-raised);
+  --interactive-hover: var(--nk-hover);
+  --interactive-accent: var(--nk-accent);
+  --interactive-accent-hover: var(--nk-secondary);
+  --interactive-success: var(--nk-accent);
+  --link-color: var(--nk-accent);
+  --link-color-hover: var(--nk-secondary);
+  --link-external-color: var(--nk-secondary);
+  --link-external-color-hover: var(--nk-accent);
+  --link-decoration: none;
+  --link-decoration-hover: underline;
+  --checkbox-color: var(--nk-accent);
+  --checkbox-color-hover: var(--nk-secondary);
+  --checkbox-border-color: var(--nk-muted);
+  --checklist-done-color: var(--nk-faint);
+  --nav-item-background-active: var(--nk-hover);
+  --nav-item-color-active: var(--nk-accent);
+  --nav-item-background-hover: color-mix(in srgb, var(--nk-hover) 65%, transparent);
+  --nav-item-color-hover: var(--nk-text);
+  --nav-item-weight-active: 600;
+  --tab-background-active: var(--nk-bg);
+  --tab-text-color: var(--nk-muted);
+  --tab-text-color-active: var(--nk-accent);
+  --tab-text-color-focused-active: var(--nk-accent);
+  --tab-outline-color: var(--nk-border);
+  --titlebar-background: var(--nk-deep);
+  --titlebar-background-focused: var(--nk-deep);
+  --titlebar-text-color-focused: var(--nk-text);
+  --ribbon-background: var(--nk-deep);
+  --status-bar-background: var(--nk-deep);
+  --status-bar-border-color: var(--nk-border);
+  --status-bar-text-color: var(--nk-muted);
+  --status-bar-radius: var(--nk-inner);
+  --modal-background: var(--nk-bg);
+  --modal-border-color: var(--nk-border);
+  --modal-radius: var(--nk-radius);
+  --menu-background: var(--nk-raised);
+  --menu-radius: var(--nk-inner);
+  --prompt-background: var(--nk-bg);
+  --prompt-border-color: var(--nk-border);
+  --search-result-background: var(--nk-raised);
+  --search-result-background-hover: var(--nk-hover);
+  --icon-color: var(--nk-muted);
+  --icon-color-hover: var(--nk-accent);
+  --icon-color-active: var(--nk-accent);
+  --icon-color-focused: var(--nk-accent);
+  --scrollbar-thumb-bg: color-mix(in srgb, var(--nk-muted) 28%, transparent);
+  --scrollbar-active-thumb-bg: color-mix(in srgb, var(--nk-accent) 45%, transparent);
+  --code-background: var(--nk-code);
+  --code-normal: var(--nk-text);
+  --code-comment: var(--nk-muted);
+  --code-function: var(--nk-accent);
+  --code-keyword: var(--nk-secondary);
+  --code-string: var(--nk-accent);
+  --code-value: var(--nk-secondary);
+  --code-property: var(--nk-muted);
+  --code-radius: var(--nk-inner);
+  --tag-color: var(--nk-accent);
+  --tag-color-hover: var(--nk-secondary);
+  --tag-background: color-mix(in srgb, var(--nk-accent) 12%, transparent);
+  --tag-background-hover: color-mix(in srgb, var(--nk-accent) 22%, transparent);
+  --tag-radius: var(--nk-inner);
+  --blockquote-border-color: var(--nk-accent);
+  --blockquote-border-thickness: 3px;
+  --blockquote-background-color: color-mix(in srgb, var(--nk-hover) 45%, transparent);
+  --table-header-background: var(--nk-hover);
+  --table-header-color: var(--nk-accent);
+  --table-header-weight: 600;
+  --table-border-color: var(--nk-border);
+  --table-row-background-hover: color-mix(in srgb, var(--nk-hover) 50%, transparent);
+  --table-row-alt-background: color-mix(in srgb, var(--nk-side) 45%, transparent);
+  --hr-color: var(--nk-border);
+  --indentation-guide-color: color-mix(in srgb, var(--nk-border) 60%, transparent);
+  --indentation-guide-color-active: var(--nk-accent);
+  --graph-line: var(--nk-border);
+  --graph-node: var(--nk-accent);
+  --graph-node-tag: var(--nk-secondary);
+  --graph-node-unresolved: var(--nk-faint);
+  --graph-node-focused: var(--nk-text);
+  --canvas-background: var(--nk-deep);
+  --canvas-card-label-color: var(--nk-muted);
+  --h1-color: var(--nk-text);
+  --h2-color: var(--nk-accent);
+  --h3-color: var(--nk-secondary);
+  --h4-color: var(--nk-text);
+  --h5-color: var(--nk-muted);
+  --h6-color: var(--nk-muted);
+  --h1-size: 2em;
+  --h2-size: 1.42em;
+  --h3-size: 1.18em;
+  --h1-weight: 650;
+  --h2-weight: 600;
+  --h3-weight: 600;
+  --inline-title-color: var(--nk-text);
+  --inline-title-size: 2em;
+  --inline-title-weight: 650;
+  --file-line-width: 780px;
+  --line-height-normal: 1.75;
+  --p-spacing: 1.1rem;
+  --radius-s: var(--nk-inner);
+  --radius-m: var(--nk-inner);
+  --radius-l: var(--nk-radius);
+  --input-radius: var(--nk-inner);
+  --button-radius: var(--nk-inner);
+  --font-monospace-theme: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+}
+
+.workspace { background: var(--nk-deep); }
+.workspace-split.mod-root {
+  position: relative;
+  isolation: isolate;
+  padding: var(--nk-gap);
+  gap: var(--nk-gap);
+  background: var(--nk-deep);
+}
+.workspace-split.mod-root > .workspace-tabs {
+  border: 1px solid var(--nk-border);
+  border-radius: var(--nk-radius);
+  overflow: hidden;
+  background: var(--nk-bg);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+}
+.workspace-split.mod-root .workspace-tab-header-container {
+  background: var(--nk-side);
+  border-bottom: 1px solid var(--nk-border);
+  padding-top: 5px;
+}
+.workspace-tab-header.is-active { box-shadow: inset 0 -2px var(--nk-accent); }
+.workspace-ribbon { border-right: 1px solid var(--nk-border); }
+.workspace-split.mod-left-split,
+.workspace-split.mod-right-split { background: var(--nk-side); }
+.workspace-leaf-content { background-color: var(--nk-bg); }
+.workspace-split.mod-left-split .workspace-leaf-content,
+.workspace-split.mod-right-split .workspace-leaf-content { background-color: var(--nk-side); }
+.view-header { background: var(--nk-bg); border-bottom: 1px solid var(--nk-border); }
+.nav-files-container { padding: 10px 8px; }
+.nav-file-title, .nav-folder-title { border-radius: var(--nk-inner); margin: 2px 0; }
+.nav-file-title.is-active { box-shadow: inset 3px 0 var(--nk-accent); }
+.nav-folder-title { font-weight: 550; }
+.nav-folder-children { border-left-color: var(--nk-border); }
+.nav-header .clickable-icon { border-radius: var(--nk-inner); }
+.clickable-icon:hover { color: var(--nk-accent); }
+.inline-title { letter-spacing: -0.025em; margin-bottom: 1em; }
+.markdown-rendered h1 { letter-spacing: -0.025em; }
+.markdown-rendered h2 { padding-bottom: 0.35em; border-bottom: 1px solid var(--nk-border); }
+.markdown-rendered h3 { letter-spacing: 0.015em; }
+.markdown-rendered a.internal-link, .cm-hmd-internal-link { text-underline-offset: 0.2em; }
+.markdown-rendered blockquote { padding: 0.8em 1.2em; border-radius: 0 var(--nk-inner) var(--nk-inner) 0; }
+.markdown-rendered pre { border: 1px solid var(--nk-border); padding: 1.2em; }
+.markdown-rendered :not(pre) > code { padding: 0.16em 0.4em; border: 1px solid var(--nk-border); }
+.markdown-rendered .callout {
+  border: 1px solid color-mix(in srgb, rgb(var(--callout-color)) 45%, var(--nk-border));
+  border-radius: var(--nk-inner);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+.markdown-rendered .callout-title { padding-bottom: 0.3em; }
+.markdown-rendered table { border-collapse: separate; border-spacing: 0; border-radius: var(--nk-inner); overflow: hidden; }
+.markdown-rendered th { padding: 0.65em 0.9em; }
+.markdown-rendered td { padding: 0.55em 0.9em; }
+.markdown-rendered img { border-radius: var(--nk-inner); }
+.markdown-rendered hr { margin: 2em 0; }
+.metadata-container { border: 1px solid var(--nk-border); border-radius: var(--nk-inner); padding: 10px 14px; }
+.metadata-properties-heading { color: var(--nk-muted); }
+.setting-tab-content { background: var(--nk-bg); }
+.setting-item { border-color: var(--nk-border); }
+.setting-item-heading { color: var(--nk-accent); }
+.setting-item-control select, .setting-item-control input:not([type="checkbox"]):not([type="range"]),
+.search-input-container input { border-color: var(--nk-border); background-color: var(--nk-raised); }
+.community-item, .theme-preview, .vertical-tab-content-container { border-color: var(--nk-border); }
+.suggestion-item.is-selected, .menu-item.selected { background: var(--nk-hover); }
+.modal, .menu, .prompt { box-shadow: 0 20px 80px rgba(0, 0, 0, 0.24); }
+button, .dropdown { border: 1px solid var(--nk-border); }
+button.mod-cta { border-color: transparent; color: var(--nk-bg); }
+input:focus-visible, textarea:focus-visible, button:focus-visible, .clickable-icon:focus-visible {
+  outline: 2px solid var(--nk-accent); outline-offset: 3px;
+}
+.status-bar { border-top: 1px solid var(--nk-border); }
+.calendar .today { color: var(--nk-accent); }
+.calendar .active { background: var(--nk-hover); color: var(--nk-accent); }
+/* Copilot follows native variables; do not recolor its alerts or permission controls. */
+.workspace-leaf-content[data-type*="copilot"] { --background-primary: var(--nk-side); }
+
+/* Ambient layers are non-interactive, confined to the editor's outer gutter. */
+.workspace-split.mod-root::before, .workspace-split.mod-root::after {
+  content: ""; position: absolute; pointer-events: none; user-select: none;
+}
+.workspace-split.mod-root::before { inset: 0; z-index: -1; }
+.workspace-split.mod-root::after { z-index: 3; }
+@media (max-width: 850px) {
+  .workspace-split.mod-root { --nk-gap: 5px; }
+  .workspace-split.mod-root::after { opacity: 0.35; }
+  .markdown-source-view, .markdown-preview-view { --file-margins: 24px 22px; }
+}
+@media (max-width: 520px) {
+  .workspace-split.mod-root::after { display: none; }
+  .workspace-split.mod-root { padding: 0; }
+  .workspace-split.mod-root > .workspace-tabs { border-radius: 0; }
+}
+'''
+
+SPECIAL = {
+'aurora': r'''
+.workspace-split.mod-root {
+  overflow: clip;
+  background:
+    radial-gradient(ellipse at 8% 5%, color-mix(in srgb, var(--nk-accent) 46%, transparent), transparent 65%),
+    radial-gradient(ellipse at 96% 88%, color-mix(in srgb, var(--nk-secondary) 48%, transparent), transparent 66%), var(--nk-deep);
+}
+.workspace-split.mod-root::before {
+  inset: -12%;
+  background:
+    radial-gradient(ellipse at 65% 22%, color-mix(in srgb, var(--nk-secondary) 44%, transparent), transparent 48%),
+    radial-gradient(ellipse at 25% 75%, color-mix(in srgb, var(--nk-accent) 34%, transparent), transparent 48%);
+  animation: aurora-sweep 24s ease-in-out infinite alternate;
+}
+.workspace-split.mod-root > .workspace-tabs {
+  background: color-mix(in srgb, var(--nk-bg) 64%, transparent);
+  border-color: color-mix(in srgb, var(--nk-muted) 52%, transparent);
+  backdrop-filter: blur(28px) saturate(135%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2), inset 1px 0 0 rgba(255,255,255,.07), 0 16px 45px rgba(0,0,0,.18);
+}
+.workspace-split.mod-root .workspace-tab-container,
+.workspace-split.mod-root .workspace-tabs .workspace-leaf,
+.workspace-split.mod-root .workspace-leaf-content,
+.workspace-split.mod-root .workspace-leaf-content[data-type="markdown"] .view-content,
+.workspace-split.mod-root .markdown-reading-view,
+.workspace-split.mod-root .markdown-preview-view,
+.workspace-split.mod-root .markdown-source-view.mod-cm6,
+.workspace-split.mod-root .cm-editor,
+.workspace-split.mod-root .cm-scroller {
+  background-color: transparent;
+}
+.workspace-split.mod-root .workspace-tab-header-container {
+  background: color-mix(in srgb, var(--nk-side) 48%, transparent);
+  border-bottom-color: color-mix(in srgb, var(--nk-muted) 35%, transparent);
+}
+.workspace-split.mod-root .view-header {
+  background: linear-gradient(100deg, color-mix(in srgb, var(--nk-accent) 13%, transparent), color-mix(in srgb, var(--nk-bg) 40%, transparent));
+  border-bottom-color: color-mix(in srgb, var(--nk-muted) 30%, transparent);
+}
+.workspace-split.mod-root::after {
+  right: 20px; bottom: 38px; width: 74px; height: 125px;
+  border: 1px solid color-mix(in srgb, var(--nk-accent) 55%, transparent);
+  border-radius: 70% 30% 65% 35% / 65% 40% 60% 35%;
+  background:
+    radial-gradient(ellipse at 27% 20%, rgba(255,255,255,.8), transparent 24%),
+    linear-gradient(145deg, color-mix(in srgb, var(--nk-accent) 50%, transparent), color-mix(in srgb, var(--nk-secondary) 42%, transparent));
+  box-shadow: inset 4px 4px 12px rgba(255,255,255,.22), inset -4px -5px 12px rgba(0,0,0,.12), 0 15px 38px rgba(0,0,0,.14);
+  transform: rotate(-26deg);
+  animation: aurora-drift 9s ease-in-out infinite;
+}
+.workspace-split.mod-left-split .workspace-leaf-content,
+.workspace-split.mod-right-split .workspace-leaf-content {
+  background: linear-gradient(155deg, color-mix(in srgb, var(--nk-accent) 5%, var(--nk-side)), color-mix(in srgb, var(--nk-secondary) 6%, var(--nk-side)));
+}
+.markdown-rendered .callout { backdrop-filter: blur(14px); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 4px 20px rgba(0,0,0,.06); }
+.markdown-rendered pre, .metadata-container { background-color: color-mix(in srgb, var(--nk-code) 72%, transparent); backdrop-filter: blur(12px); }
+.nav-file-title.is-active { background: linear-gradient(100deg, var(--nk-hover), transparent); }
+.setting-tab-content { background: radial-gradient(ellipse at 100% 100%, color-mix(in srgb, var(--nk-secondary) 10%, transparent), transparent 60%), var(--nk-bg); }
+@supports not (backdrop-filter: blur(1px)) {
+  .workspace-split.mod-root > .workspace-tabs { background-color: var(--nk-bg); }
+}
+@keyframes aurora-sweep {
+  from { transform: translate3d(-3%, -2%, 0) rotate(-8deg); }
+  to { transform: translate3d(5%, 5%, 0) rotate(8deg); }
+}
+@keyframes aurora-drift {
+  0%,100% { transform: translate3d(0,0,0) rotate(-26deg); }
+  50% { transform: translate3d(-5px,-24px,0) rotate(-12deg); }
+}
+''',
+'ocean': r'''
+body { --callout-opacity: .055; }
+.workspace-split.mod-root {
+  background: radial-gradient(ellipse at 55% 0%, color-mix(in srgb, var(--nk-accent) 13%, transparent), transparent 65%), var(--nk-deep);
+}
+.workspace-split.mod-root > .workspace-tabs { box-shadow: 0 18px 45px rgba(0,15,24,.2); border-top-color: color-mix(in srgb, var(--nk-accent) 45%, var(--nk-border)); }
+.workspace-split.mod-root::after {
+  right: 22px; bottom: 35px; width: 92px; height: 138px;
+  background:
+    radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--nk-accent) 18%, transparent) 8%, color-mix(in srgb, var(--nk-accent) 68%, transparent) 67%, transparent 71%) center top / 90px 48px no-repeat,
+    linear-gradient(var(--nk-accent),transparent) 18px 46px / 2px 54px no-repeat,
+    linear-gradient(var(--nk-accent),transparent) 31px 46px / 1px 83px no-repeat,
+    linear-gradient(var(--nk-secondary),transparent) 45px 46px / 2px 71px no-repeat,
+    linear-gradient(var(--nk-accent),transparent) 59px 46px / 1px 90px no-repeat,
+    linear-gradient(var(--nk-accent),transparent) 72px 46px / 2px 59px no-repeat;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--nk-accent) 16%, transparent));
+  animation: jellyfish-drift 8s ease-in-out infinite;
+}
+.markdown-reading-view, .markdown-source-view.mod-cm6 {
+  background-image: radial-gradient(ellipse at 100% 100%, color-mix(in srgb, var(--nk-accent) 4%, transparent), transparent 62%);
+}
+.nav-folder-title { color: var(--nk-accent); }
+.nav-file-title.is-active { box-shadow: inset 3px 0 var(--nk-accent), inset 0 0 22px color-mix(in srgb, var(--nk-accent) 6%, transparent); }
+.inline-title, .markdown-rendered h1 { letter-spacing: .015em; }
+.markdown-rendered h2 { border-bottom-style: dashed; }
+.markdown-rendered pre { box-shadow: inset 0 2px 0 color-mix(in srgb, var(--nk-accent) 35%, transparent); }
+.markdown-rendered blockquote { border-radius: 0 20px 20px 0; }
+.setting-tab-content { background: radial-gradient(ellipse at 90% 0%, color-mix(in srgb, var(--nk-accent) 8%, transparent), transparent 55%), var(--nk-bg); }
+@keyframes jellyfish-drift {
+  0%,100% { transform: translate3d(0,0,0) rotate(-5deg) scale(1); }
+  50% { transform: translate3d(-6px,-26px,0) rotate(5deg) scale(1.025,.97); }
+}
+''',
+'cyber': r'''
+.workspace-split.mod-root {
+  background:
+    linear-gradient(color-mix(in srgb, var(--nk-accent) 8%, transparent) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg,color-mix(in srgb, var(--nk-accent) 8%, transparent) 1px, transparent 1px) 0 0 / 24px 24px, var(--nk-deep);
+}
+.workspace-split.mod-root > .workspace-tabs { border-top: 2px solid var(--nk-accent); box-shadow: 0 0 22px color-mix(in srgb, var(--nk-accent) 7%, transparent); }
+.workspace-split.mod-root::after {
+  top: 85px; right: 18px; width: 24px; height: 140px;
+  background:
+    linear-gradient(transparent,var(--nk-accent),transparent) 0 0 / 2px 100% no-repeat,
+    repeating-linear-gradient(to bottom,var(--nk-accent) 0 2px,transparent 2px 14px) right top / 12px 100% no-repeat;
+  opacity: .6; animation: circuit-scan 7s ease-in-out infinite;
+}
+.workspace-tab-header, .status-bar, .view-header-breadcrumb, .nav-folder-title { font-family: var(--font-monospace-theme); }
+.inline-title, .markdown-rendered h1 { letter-spacing: -.04em; }
+.inline-title::before, .markdown-rendered h1::before { content: "> "; color: var(--nk-accent); font-weight: 400; }
+.markdown-rendered h2 { border-bottom-color: var(--nk-accent); border-bottom-style: dotted; }
+.markdown-rendered pre { position: relative; padding-top: 2.4em; border-left: 2px solid var(--nk-accent); }
+.markdown-rendered pre::before { content: ""; position: absolute; top: 14px; left: 16px; width: 6px; height: 6px; border-radius: 50%; background: var(--nk-secondary); box-shadow: 13px 0 var(--nk-muted), 26px 0 var(--nk-accent); }
+.nav-file-title.is-active { border: 1px solid var(--nk-border); border-right: 2px solid var(--nk-accent); }
+.markdown-rendered blockquote { border-left-color: var(--nk-secondary); }
+.markdown-rendered .callout { border-left-width: 3px; }
+.metadata-container { border-style: dashed; }
+.setting-tab-content .setting-item-heading { font-family: var(--font-monospace-theme); }
+@keyframes circuit-scan {
+  0%,100% { transform: translate3d(0,0,0); opacity: .35; }
+  50% { transform: translate3d(0,110px,0); opacity: .8; }
+}
+''',
+}
+
+END = r'''
+/* Honor accessibility preferences; page text never moves. */
+@media (prefers-reduced-motion: reduce) {
+  .workspace-split.mod-root::before, .workspace-split.mod-root::after { animation: none; }
+}
+@media print {
+  .workspace-split.mod-root::before, .workspace-split.mod-root::after { display: none; }
+  .markdown-rendered { background: white; color: black; box-shadow: none; }
+}
+'''
+
+KEYS = ['bg','side','raised','text','muted','faint','accent','secondary','border','hover','deep']
